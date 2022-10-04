@@ -84,6 +84,8 @@ code {
   transform: translate(-50%,-50%);
   margin-top: 30px;
   background-color: #DDDDDD;
+  width: 80%;
+  max-width: 1000px;
 }
 .btn-container {
   display: flex;
@@ -155,5 +157,6 @@ code {
     width: 250px;
     margin: 20px auto;
   }
+  
 }
 
