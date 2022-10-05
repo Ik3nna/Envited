@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const HomeComponent = ()=> {
 
     return(
-        <main className="container">
+        <main className="container" id="container1">
             <img className="image" src={process.env.PUBLIC_URL+"images/image_1.svg"} />
 
             <div className="text-container">

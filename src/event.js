@@ -1,24 +1,44 @@
 import React from "react";
-import { useGlobalContext } from "./context";
+import { IoIosCalendar } from "react-icons/io";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { useSearchParams } from "react-router-dom";
 
 const Event = ()=> {
-    const {  } = useGlobalContext();
+    const [searchParams,setSearchParams] = useSearchParams();
 
-    console.log()
+    let dateString = searchParams.get("date");
+    let dateObject = new Date(dateString);
 
-    {list.map((item,index)=>{
-        const { ename,hname,ltn,date,time } = item;
+    let time = searchParams.get("time").split(':');
+    let meridiemTime = time[0] >= 12 && (time[0]-12 || 12) + ':' + time[1] + ' PM' || (Number(time[0]) || 12) + ':' + time[1] + ' AM';
 
-        return(
-            <section key={index} className="container">
-                <div className="section-text">
-                    <h2>{ename}</h2>
-                    <p>Hosted by {hname}</p>
+    return(
+        <main className="event-container">
+            <div className="text-content">
+                <h2>{searchParams.get("eventname")}</h2>
+                <p>Hosted by <strong className="text-capitalize">{searchParams.get("hostname")}</strong></p>
+
+                <div className="stack">
+                    <span><IoIosCalendar className="icons" /></span> 
+                        
+                    <div className="stack-text">
+                        <strong>{dateObject.toString()}</strong>
+                        <strong>{meridiemTime}</strong>
+                    </div>
                 </div>
-            </section>
-        );
-    })}
 
+                <div className="stack">
+                    <span><HiOutlineLocationMarker className="icons" /></span> 
+                        
+                    <div className="stack-text">
+                        <strong>{searchParams.get("location")} </strong>
+                    </div>
+                </div>
+            </div>
+
+            <img className="img" src={process.env.PUBLIC_URL+"images/cake_img.png"} />
+        </main>
+    );
 }
 
 export default Event
