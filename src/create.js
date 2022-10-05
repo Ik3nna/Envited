@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button, Col, Row, Form } from "react-bootstrap";
 import { useGlobalContext } from "./context";
@@ -19,6 +19,8 @@ const Create = ()=> {
         agree: false,
         date: ""
     });
+    const nextBtn = useRef(null);
+    const submit = useRef(null);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -28,7 +30,9 @@ const Create = ()=> {
             alert("Please ensure you fill in the right details")
             event.stopPropagation();
         } else {
-            alert("Your responses have been saved")
+            alert("Your responses have been saved");
+            nextBtn.current.style.display = "block";
+            submit.current.style.display = "none";
         }
 
         setValidated(true);
@@ -41,6 +45,8 @@ const Create = ()=> {
             time: time,
             date: date
         }
+
+        // new list should be posted to a resource and consumed in the "/event"
     }
 
 
@@ -126,10 +132,19 @@ const Create = ()=> {
                     />
                 </Form.Group>
 
-                
-                <Button type="submit" className="btn">
-                    Submit
-                </Button>
+                <div className="btn-container">
+                    <Link to="/" className="btn back">
+                        Back
+                    </Link>
+
+                    <Button type="submit" ref={submit} className="submit">
+                        Submit
+                    </Button>
+
+                    <Link to="/event" className="btn" ref={nextBtn} style={{ display: "none" }}>
+                        Next
+                    </Link>
+                </div>
             </Form>
         </section>
     );
