@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Col, Row, Form } from "react-bootstrap";
 import { useGlobalContext } from "./context";
@@ -10,22 +10,38 @@ const Create = ()=> {
     const [location,setLocation] = useState("");
     const [time,setTime] = useState("");
     const [date,setDate] = useState("");
-    const [agree,setAgree] = useState(false)
-    const [list,setList] = useState({});
+    const [agree,setAgree] = useState(false);
+    const [list,setList] = useState({
+        eventname: "",
+        hostname: "",
+        location: "",
+        time: "",
+        agree: false,
+        date: ""
+    });
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            alert("Please ensure you fill in the right details")
+            event.stopPropagation();
+        } else {
+            alert("Your responses have been saved")
+        }
+
         setValidated(true);
        
-        // const newList = {
-        //     en: eventname,
-        //     hn: hostname,
-        //     ln: location,
-        //     tm: time,
-        //     dt: date
-        // }
+        const newList = {
+            eventname: eventname,
+            hostname: hostname,
+            location: location,
+            agree: agree,
+            time: time,
+            date: date
+        }
     }
-
 
 
     return(
@@ -110,6 +126,7 @@ const Create = ()=> {
                     />
                 </Form.Group>
 
+                
                 <Button type="submit" className="btn">
                     Submit
                 </Button>
