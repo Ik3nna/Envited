@@ -7,7 +7,7 @@ const Event = ()=> {
     const [searchParams,setSearchParams] = useSearchParams();
 
     let dateString = searchParams.get("date");
-    let dateObject = new Date(dateString);
+    let dateObject = new Date(dateString).toDateString();
 
     let time = searchParams.get("time").split(':');
     let meridiemTime = time[0] >= 12 && (time[0]-12 || 12) + ':' + time[1] + ' PM' || (Number(time[0]) || 12) + ':' + time[1] + ' AM';
