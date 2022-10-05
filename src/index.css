@@ -77,11 +77,13 @@ code {
   margin-top: 30px;
   font-size: 24px;
 }
+.event-header {
+  margin-top: 50px;
+}
 .form-group {
   position: absolute;
-  top: 40%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translateX(-50%);
   margin-top: 30px;
   background-color: #DDDDDD;
   width: 80%;
@@ -93,7 +95,7 @@ code {
   align-items: center;
   margin-top: 40px;
 }
-.back {
+.back, .submit {
   margin-right: 50px;
 }
 

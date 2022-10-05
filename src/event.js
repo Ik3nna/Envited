@@ -1,13 +1,24 @@
 import React from "react";
+import { useGlobalContext } from "./context";
 
 const Event = ()=> {
-    return(
-        <main className="container">
-            <img className="image" src={process.env.PUBLIC_URL+"images/cake_img.png"} />
+    const {  } = useGlobalContext();
 
-            
-        </main>
-    );
+    console.log()
+
+    {list.map((item,index)=>{
+        const { ename,hname,ltn,date,time } = item;
+
+        return(
+            <section key={index} className="container">
+                <div className="section-text">
+                    <h2>{ename}</h2>
+                    <p>Hosted by {hname}</p>
+                </div>
+            </section>
+        );
+    })}
+
 }
 
 export default Event

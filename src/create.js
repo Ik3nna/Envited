@@ -1,94 +1,119 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Label, Input } from "reactstrap";
-
+import { Button, Col, Row, Form } from "react-bootstrap";
+import { useGlobalContext } from "./context";
 
 const Create = ()=> {
+    const [validated, setValidated] = useState(false);
     const [eventname,setEventname] = useState("");
     const [hostname,setHostname] = useState("");
     const [location,setLocation] = useState("");
     const [time,setTime] = useState("");
     const [date,setDate] = useState("");
-    const [list,setList] = useState([])
+    const [agree,setAgree] = useState(false)
+    const [list,setList] = useState({});
 
-    const getList = ()=> {
-        setList({
-            ename: eventname,
-            hname: hostname,
-            ltn: location,
-            time: time,
-            date: date
-        });
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setValidated(true);
+       
+        // const newList = {
+        //     en: eventname,
+        //     hn: hostname,
+        //     ln: location,
+        //     tm: time,
+        //     dt: date
+        // }
     }
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        getList();
-    }
-   
+
+
     return(
         <section className="create-page">
-            <h3 className="text-center mt-5">Event details</h3>
+            <h3 className="text-center event-header">Event details</h3>
 
-                <div className="row">
-                    <div className="col-12">
-                        <Form className="form-group" onSubmit={handleSubmit}>
-                            <FormGroup>
-                                <Label htmlFor="eventname">Event Name</Label>
-                                    <Input type="text" id="eventname" name="eventname"
-                                        value={eventname} onChange={(e)=> setEventname(e.target.value)}
-                                    />
-                            </FormGroup>
+            <Form className="form-group" noValidate validated={validated} onSubmit={handleSubmit}>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="12" controlId="validationCustom01">
+                        <Form.Label>Event name</Form.Label>
+                        <Form.Control
+                            required
+                            type="text"
+                            placeholder="Event name"
+                            value = {eventname}
+                            onChange = {(e)=>setEventname(e.target.value)}
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    </Form.Group>
+                </Row>
 
-                            <FormGroup>
-                                <Label htmlFor="hostname">Host Name</Label>
-                                <Input type="text" id="hostname" name="hostname"
-                                    value={hostname} onChange={(e)=> setHostname(e.target.value)}
-                                />
-                            </FormGroup>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="12" controlId="validationCustom02">
+                        <Form.Label>Host name</Form.Label>
+                        <Form.Control
+                            required
+                            type="text"
+                            placeholder="Host name"
+                            value = {hostname}
+                            onChange = {(e)=>setHostname(e.target.value)}
+                        />
+                        <Form.Control.Feedback type="invalid">Please add a Host name</Form.Control.Feedback>
+                    </Form.Group>
+                </Row>
 
-                            <FormGroup>
-                                <div className="row">
-                                    <div className="col-6">
-                                        <Label htmlFor="time">Time</Label>
-                                        <Input type="time" id="time" value={time} 
-                                            onChange={(e)=> setTime(e.target.value)}  name="time"
-                                        />
-                                    </div>
+                <Row className="mb-3">
+                    <Form.Group as={Col} xs="6" controlId="validationCustom03">
+                        <Form.Label>Time</Form.Label>
+                        <Form.Control
+                            required
+                            type="time"
+                            value = {time}
+                            onChange = {(e)=>setTime(e.target.value)}
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    </Form.Group>
 
-                                    <div className="col-6">
-                                        <Label htmlFor="time">Date</Label>
-                                        <Input type="date" id="time" value={date} name="date"
-                                            onChange={(e)=> setDate(e.target.value)} 
-                                        />
-                                    </div>
-                                </div>
-                            </FormGroup>
+                    <Form.Group as={Col} xs="6" controlId="validationCustom04">
+                        <Form.Label>Date</Form.Label>
+                        <Form.Control
+                            required
+                            type="date"
+                            value = {date}
+                            onChange = {(e)=>setDate(e.target.value)}
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    </Form.Group>
+                </Row>
 
-                            <FormGroup>
-                                <Label htmlFor="location">Location</Label>
-                                    <Input type="textarea" id="location" name="location" 
-                                        value={location} onChange={(e)=> setLocation(e.target.value)}
-                                    />
-                            </FormGroup>
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="12" controlId="validationCustom05">
+                        <Form.Label>Location</Form.Label>
+                        <Form.Control
+                            required
+                            type="text"
+                            placeholder="Location"
+                            value = {location}
+                            onChange = {(e)=>setLocation(e.target.value)}
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    </Form.Group>
+                </Row>
 
-                            <FormGroup>
-                                <Input type="checkbox"
-                                />   Show photo
-                            </FormGroup>
+                <Form.Group className="mb-3">
+                    <Form.Check
+                        required
+                        label="Show Photo"
+                        feedback="You must check the box before submitting."
+                        feedbackType="invalid"
+                        value = {agree}
+                        onChange = {(e)=>setAgree(e.target.checked)}
+                    />
+                </Form.Group>
 
-                            <div className="btn-container">
-                                <Link to="/" className="btn back">
-                                    Back
-                                </Link>
-
-                                <Link to="/event" type="submit" className="btn next">
-                                    Next
-                                </Link>
-                            </div>
-                        </Form>
-                    </div>
-                </div>
+                <Button type="submit" className="btn">
+                    Submit
+                </Button>
+            </Form>
         </section>
     );
 }
