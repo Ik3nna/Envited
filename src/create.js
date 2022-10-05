@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button, Col, Row, Form } from "react-bootstrap";
-import { useGlobalContext } from "./context";
 
 const Create = ()=> {
     const [validated, setValidated] = useState(false);
@@ -11,14 +10,16 @@ const Create = ()=> {
     const [time,setTime] = useState("");
     const [date,setDate] = useState("");
     const [agree,setAgree] = useState(false);
-    const [list,setList] = useState({
-        eventname: "",
-        hostname: "",
-        location: "",
-        time: "",
-        agree: false,
-        date: ""
-    });
+
+    const list = {
+        eventname: eventname,
+        hostname: hostname,
+        location: location,
+        agree: agree,
+        time: time,
+        date: date
+    }
+    
     const nextBtn = useRef(null);
     const submit = useRef(null);
 
@@ -34,21 +35,8 @@ const Create = ()=> {
             nextBtn.current.style.display = "block";
             submit.current.style.display = "none";
         }
-
         setValidated(true);
-       
-        const newList = {
-            eventname: eventname,
-            hostname: hostname,
-            location: location,
-            agree: agree,
-            time: time,
-            date: date
-        }
-
-        // new list should be posted to a resource and consumed in the "/event"
     }
-
 
     return(
         <section className="create-page">
@@ -141,7 +129,9 @@ const Create = ()=> {
                         Submit
                     </Button>
 
-                    <Link to="/event" className="btn" ref={nextBtn} style={{ display: "none" }}>
+                    <Link to={`/event?eventname=${list.eventname}&hostname=${list.hostname}&location=${list.location}&
+                        agree=${list.agree}&time=${list.time}&date=${list.date}`}
+                        className="btn next" ref={nextBtn} style={{ display: "none" }}>
                         Next
                     </Link>
                 </div>
