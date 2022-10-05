@@ -23,7 +23,7 @@ const Event = ()=> {
                         
                     <div className="stack-text">
                         <strong>{dateObject.toString()}</strong>
-                        <strong>{meridiemTime}</strong>
+                        <strong className="mt-time">{meridiemTime}</strong>
                     </div>
                 </div>
 

@@ -143,6 +143,8 @@ code {
 .stack-text {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   font-size: 18px;
 }
 .stack-text strong:first-of-type {
@@ -218,12 +220,7 @@ code {
     margin-left: 50px;
     text-align: left;
   }
-  .stack-text {
-    margin-left: 20px;
-  }
-  .stack-text strong:first-child {
-    margin-left: -27px;
-  }
+  
 }
 
 
@@ -284,11 +281,6 @@ code {
     margin-left: 30px;
     text-align: left;
   }
-  .stack-text {
-    margin-left: 20px;
-  }
-  .stack-text strong:first-child {
-    margin-left: -27px;
-  }
+ 
 }
 
